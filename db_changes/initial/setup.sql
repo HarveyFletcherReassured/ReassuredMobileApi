@@ -8,5 +8,6 @@ CREATE TABLE users(
   token     VARCHAR(300) NOT NULL,
   firstname VARCHAR(75)  NOT NULL,
   surname   VARCHAR(75)  NOT NULL,
+  created   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(id)
 );
