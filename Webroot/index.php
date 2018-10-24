@@ -36,5 +36,8 @@
     * this point. Parameter checking must be done within the requested function.
     **/
 
+    //Connect to the database. The connection is in this file.
+    include_once('../ApiFiles/database.php');
+
     //Make a call to execute the function.
     $Controller->$Function();
