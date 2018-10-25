@@ -37,7 +37,7 @@
             if( $loginResult["status"]["code"] != 200 ){
                 $api->stdOut( $loginResult["status"]["code"], $loginResult["status"]);
             } else {
-                return $loginResult["data"];
+                return $loginResult["data"][0];
             }
         }
     }

@@ -43,6 +43,20 @@
             return $parameters;
         }
 
+        function checkRequiredFields( $requiredFields ){
+            global $api;
+
+            //These are the fields that WERE specified
+            $specifiedFields = get_object_vars( $api->read() );
+
+            //Do all the required fields exist in the specified fields
+            foreach( $requiredFields as $fieldName){
+                if( !isset( $specifiedFields[$fieldName] ) ){
+                    $api->stdOut( 422, "You are missing `" . $fieldName . "` field from your request. It is a required field." );
+                }
+            }
+        }
+
         function postRequest( $url, $postFields, $auth ){
             $curl = curl_init();
 
