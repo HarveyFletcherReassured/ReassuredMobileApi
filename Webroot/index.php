@@ -39,5 +39,8 @@
     //Connect to the database. The connection is in this file.
     include_once('../ApiFiles/database.php');
 
+    //Functions past this point might require api keys, include them
+    include_once('../ApiFiles/keys.php');
+
     //Make a call to execute the function.
     $Controller->$Function();

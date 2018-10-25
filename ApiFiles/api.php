@@ -31,4 +31,38 @@
             //Return the sanitised list of controllers
             return $Controllers;
         }
+
+        function read(){
+            //Get the json from the php input
+            $parameters = file_get_contents( "php://input" );
+
+            //Decode the json to be a php object
+            $parameters = json_decode($parameters);
+
+            //Return the decoded object
+            return $parameters;
+        }
+
+        function postRequest( $url, $postFields, $auth ){
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => json_encode( $postFields ),
+                    CURLOPT_HTTPHEADER => array(
+                            "Content-Type: application/json",
+                            "cache-control: no-cache",
+                            $auth
+                        ),
+                )
+            );
+
+            return json_decode( curl_exec( $curl ), true );
+        }
     }
